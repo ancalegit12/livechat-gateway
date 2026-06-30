@@ -1,0 +1,6 @@
+## 配置中心apollo配置
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: application,bnc.meter-push-gateway,application.yml
+  meta: http://192.168.163.107:8601/

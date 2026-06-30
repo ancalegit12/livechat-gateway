@@ -1,0 +1,110 @@
+spring:
+  jackson:
+    default-property-inclusion: NON_NULL
+  application:
+    name: livechat-gateway
+  main:
+    allow-bean-definition-overriding: true
+  # Redis连接配置
+  redis:
+    host: r-d9jldxf2vu58kx8gjh.redis.ap-southeast-5.rds.aliyuncs.com
+    port: 6379
+    password: G8fmf46xanik66h8
+  cloud:
+    inetutils:
+      ignoredInterfaces:
+        - Hyper.*
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        # live-chat-app-biz
+        - id: live-chat-app-biz
+          uri: lb://live-chat-app-biz
+          order: 10009
+          predicates:
+            - Path=/capi/live-chat-app/**
+          filters:
+            - name: CacheBody
+            - name: LivechatToken
+            - name: BYBApiAuth
+              args:
+                active: true
+
+        # livechat-biz
+        - id: bnc-livechat-biz
+          uri: lb://bnc-livechat-biz
+          order: 10010
+          predicates:
+            - Path=/livechat/**
+          filters:
+            - name: CacheBody
+            - name: LivechatToken
+            - name: BYBApiAuth
+              args:
+                active: true
+                checkUri:
+                  - /app/public/api/get/otpcode
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 500
+                key-resolver: "#{@ipAndPathKeyResolver}"
+
+management:
+  server:
+    port: 10003
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  trace:
+    http:
+      enabled: false
+  metrics:
+    export:
+      prometheus:
+        pushgateway:
+          enabled: false
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 12000
+          semaphore:
+            maxConcurrentRequests: 1000
+      fallback:
+        isolation:
+          semaphore:
+            maxConcurrentRequests: 1000
+      circuitBreaker:
+        enabled: true
+        sleepWindowInMilliseconds: 5000
+        requestVolumeThreshold: 10
+        errorThresholdPercentage: 50
+
+# 手机网银校验签名
+api:
+  auth:
+    enableApiAuth: true
+    androidMinSignVersion: 0
+    iosMinSignVersion: 0
+    timeoutDuration: 86400000
+    android-api-secure-key:
+      - min-version: 0
+        max-version: 1000
+        secure-key: NTVmZDkwY2YwNWY3YWFhNGJhYzM2NjAyODQxMjI4NmEzZWM0MDc4Mw==
+    ios-api-secure-key:
+      - min-version: 0
+        max-version: 1000
+        secure-key: NTVmZDkwY2YwNWY3YWFhNGJhYzM2NjAyODQxMjI4NmEzZWM0MDc4Mw==

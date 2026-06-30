@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: livechat-gateway
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: sit
+app:
+  group: #配置业务域和系统域英文标识，具体参考 http://192.168.3.247:8888/systemcode/walle/buscode
+    business: xxx
+    system: livechat-gateway
+  owner: yangfei@akulaku.com #邮箱
+
+server:
+  port: 10002
+  servlet:
+      context-path: /
+

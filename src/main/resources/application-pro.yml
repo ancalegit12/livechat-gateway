@@ -1,0 +1,6 @@
+## 配置中心apollo配置
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: application,byb.meter-push-gateway,application.yml
+  meta: http://apollo.bnc.com/
