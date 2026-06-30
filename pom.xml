@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.bnc</groupId>
+		<artifactId>livechat-gateway-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>livechat-gateway</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+
+		<!-- prometheus starter start -->
+		<dependency>
+			<groupId>com.akulaku.platform.components.gateway</groupId>
+			<artifactId>al-gw-core</artifactId>
+			<version>1.0.0-RELEASE</version>
+		</dependency>
+		<!-- prometheus starter end -->
+
+		<!-- nacos -->
+
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.0</version>
+		</dependency>
+
+		<!-- config center client -->
+		<dependency>
+			<groupId>com.akulaku.platform.components</groupId>
+			<artifactId>apollo-refresher</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.akulaku.platform.components</groupId>
+			<artifactId>al-base-component-util</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.akulaku.platform.components.serviceframework</groupId>
+			<artifactId>al-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- redis -->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.akulaku.platform.components</groupId>
+			<artifactId>al-base-component-log</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.bnc.neith</groupId>
+			<artifactId>neith-basic</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.bnc.neith</groupId>
+			<artifactId>neith-session</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.akulaku.platform.components.serviceframework</groupId>
+			<artifactId>meter-http-starter</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>livechat-gateway</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
